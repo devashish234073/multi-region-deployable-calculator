@@ -1,4 +1,4 @@
-const request = require('request')
+const request_ = require('request')
 const express = require('express')
 const dbCreds = require('../dbcreds').connObj
 var uuid = require('uuid');
@@ -16,7 +16,7 @@ const divAPIURL = "http://localhost:3004/div";
 
 function callApi(url) {
     return new Promise((resolve, reject) => {
-        request(url, { json: true }, (err, res, body) => {
+        request_(url, { json: true }, (err, res, body) => {
             if (err) reject(err)
             resolve(body)
         });
