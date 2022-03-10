@@ -1,6 +1,6 @@
 module.exports.connObj = {
-    host: "********.amazonaws.com",
+    host: "*******.rds.amazonaws.com",
     user: "admin",
-    password: "",
+    password: "*****",
     database: "sitedb"
 };
