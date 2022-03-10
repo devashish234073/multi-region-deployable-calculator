@@ -5,53 +5,118 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calculator</title>
     <style>
-        input[type='number']{
-            width:40px;
-            height:40px;
-            font-size:20px;
+        input[type='number'] {
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
         }
-        input[type='submit']{
-            height:45px;
-            font-size:20px;
+
+        input[type='button'] {
+            height: 45px;
+            font-size: 20px;
         }
-        input[type='text']{
-            height:40px;
-            font-size:20px;
+
+        input[type='text'] {
+            height: 40px;
+            font-size: 20px;
         }
-        select{
-            width:40px;
-            height:45px;
-            font-size:20px;
+
+        select {
+            width: 40px;
+            height: 45px;
+            font-size: 20px;
         }
-        form{
-            display:block;
-            width:400px;
+
+        form {
+            display: block;
+            width: 400px;
             margin-left: auto;
             margin-right: auto;
         }
-        p{
+
+        p {
             margin-top: 30px;
             text-align: center;
         }
+
+        #calcOut {
+            color: green;
+        }
+        #calcErr {
+            color: red;
+        }
+
+        #transactionStatus {
+            color: blue;
+            font-weight: bold;
+            font-size: 25px;
+        }
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <p>Calculator</p>
-    <form method="POST" action="calculate">
-        <input type="number" name="num1" style="margin-left:70px"><select name="oper">
+    <form>
+        <input type="number" name="num1" id="num1" style="margin-left:70px"><select id="oper" name="oper">
             <option value="ADD">+</option>
             <option value="SUB">-</option>
             <option value="MUL">*</option>
             <option value="DIV">/</option>
-        </select><input type="number" name="num2"><input type="submit" value="Calculate">
+        </select><input type="number" name="num2" id="num2"><input type="button" value="Calculate"
+            onclick="calculate()">
+        <p id="calcOut"></p>
+        <p id="calcErr"></p>
     </form>
     <p>Transaction Status</p>
-    <form method="GET" action="checkTransactionStatus">
-        <input type="text" name="txid"><input type="submit" value="Get Status">
+    <form>
+        <input type="text" name="txid" id="txid"><input type="button" value="Get Status"
+            onclick="checkTransactionStatus()">
+        <p id="transactionStatus"></p>
     </form>
+    <script>
+        var oper = document.querySelector("#oper");
+        var num1 = document.querySelector("#num1");
+        var num2 = document.querySelector("#num2");
+        var txid = document.querySelector("#txid");
+        function calculate() {
+            try {
+                $.ajax({
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        "num1": num1.value,
+                        "oper": oper.value,
+                        "num2": num2.value
+                    }),
+                    dataType: 'json',
+                    success: function (result) {
+                        $("#calcOut").html(result);
+                        $("#calcErr").html("");
+                    },
+                    error: function (err) {
+                        $("#calcOut").html("");
+                        $("#calcErr").html("failed ["+JSON.stringify(err)+"]");
+                    },
+                    processData: false,
+                    type: 'POST',
+                    url: '/calculate'
+                });
+            } catch (e) {
+                $("#calcOut").html("");
+                $("#calcErr").html("failed ["+JSON.stringify(e)+"]");
+            }
+        }
+        function checkTransactionStatus() {
+            $.ajax({
+                url: "checkTransactionStatus?txid=" + txid.value, success: function (result) {
+                    $("#transactionStatus").html(result);
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

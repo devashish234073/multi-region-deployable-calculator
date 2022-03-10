@@ -41,13 +41,19 @@ app.post('/calculate', (req, res) => {
     let txid = uuidv4();
     apiURL += `?num1=${parsedQs.num1}&num2=${parsedQs.num2}&txid=${txid}`;
     console.log(`calling ${apiURL} ......`);
-    callApi(apiURL)
+    try {
+        callApi(apiURL)
         .then(response => {
             res.json(response)
         })
         .catch(error => {
-            res.send(error)
+            console.log("F1 error ["+error+"]");
+            res.end(String(error))
         })
+    } catch(e) {
+        console.log("F2 error");
+        res.end(String(e))
+    }
 })
 
 app.get('/', (req, res) => {
