@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input[type='number']{
+            width:40px;
+            height:40px;
+            font-size:20px;
+        }
+        input[type='submit']{
+            height:45px;
+            font-size:20px;
+        }
+        input[type='text']{
+            height:40px;
+            font-size:20px;
+        }
+        select{
+            width:40px;
+            height:45px;
+            font-size:20px;
+        }
+        form{
+            display:block;
+            width:400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        p{
+            margin-top: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <p>Calculator</p>
+    <form method="POST" action="calculate">
+        <input type="number" name="num1" style="margin-left:70px"><select name="oper">
+            <option value="ADD">+</option>
+            <option value="SUB">-</option>
+            <option value="MUL">*</option>
+            <option value="DIV">/</option>
+        </select><input type="number" name="num2"><input type="submit" value="Calculate">
+    </form>
+    <p>Transaction Status</p>
+    <form method="GET" action="checkTransactionStatus">
+        <input type="text" name="txid"><input type="submit" value="Get Status">
+    </form>
+</body>
+
+</html>

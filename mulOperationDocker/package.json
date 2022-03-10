@@ -1,5 +1,5 @@
 {
-  "name": "webapp",
+  "name": "muloperationdocker",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -12,9 +12,7 @@
     "url": "git+https://github.com/devashish234073/multi-region-deployable-calculator.git"
   },
   "keywords": [
-    "devashish234073",
-    "devashish",
-    "calculator"
+    "devashish234073"
   ],
   "author": "Devashish Priyadarshi",
   "license": "ISC",

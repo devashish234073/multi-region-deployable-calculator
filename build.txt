@@ -1,0 +1,4 @@
+docker build -t addoperation:1.0 . -f Dockerfile_add
+docker build -t suboperation:1.0 . -f Dockerfile_sub
+docker build -t muloperation:1.0 . -f Dockerfile_mul
+docker build -t divoperation:1.0 . -f Dockerfile_div

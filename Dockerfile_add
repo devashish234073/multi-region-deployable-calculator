@@ -1,0 +1,18 @@
+#Specify a base image
+FROM node:alpine
+
+RUN mkdir -p /app
+
+#Copy the project
+COPY dbcreds.js .
+COPY dbCommons.js .
+COPY addOperationDocker/package.json app
+COPY addOperationDocker/server.js app
+
+WORKDIR app
+
+#Install dependencies
+RUN npm install 
+
+#Default command
+CMD ["npm","start"]

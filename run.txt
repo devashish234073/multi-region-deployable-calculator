@@ -1,0 +1,4 @@
+docker run -p 3001:3001 <addoperation docker id>
+docker run -p 3002:3002 <suboperation docker id>
+docker run -p 3003:3003 <muloperation docker id>
+docker run -p 3004:3004 <divoperation docker id>
